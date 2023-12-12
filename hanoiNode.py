@@ -6,7 +6,7 @@ import copy
 class HanoiConfig:
 
     def __init__(self,n):
-        self.towers=[list(range(0, n+1, 1)),list(),list()]
+        self.towers=[list(range(n, 0, -1)),list(),list()]
 
     def can_move(self, source, destination):
         source_tower = self.towers[source]
@@ -29,11 +29,11 @@ class HanoiConfig:
         return 1
 
     def __eq__(self, other):
-        return None
+        return self.towers == other.towers
 
 
 def isFinal(node):
-    if len(node.towers[0])==0 and len(node.towers[1])==0 and node.towers[2]==oooooo:
+    if len(node.towers[0])==0 and len(node.towers[1])==0 and all(node.towers[2][i] > node.towers[2][i+1] for i in range(len(node.towers[2])-1)):
         return True
     return False
 #x=list(range(0, 7, 1))
