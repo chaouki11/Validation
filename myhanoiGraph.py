@@ -2,6 +2,7 @@
 from collections import deque
 from IRootedGraph import RootedGraph
 from hanoiNode import HanoiConfig, isFinal
+from traceHanoi import print_trace_for_direct_solution
 
 class HanoiRG(RootedGraph):
     def __init__(self):
@@ -51,6 +52,8 @@ def bfsSearch(graph,query):
 
 gr=HanoiRG()
 #print(bfsSearch(gr,isFinal))
-
+print("BFS search: \n\n")
 for e in bfsSearch(gr,isFinal):
     print(e.towers)
+print("\n\nTrace : \n\n")
+print_trace_for_direct_solution(gr,isFinal)
