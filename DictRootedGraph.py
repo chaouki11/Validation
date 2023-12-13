@@ -1,7 +1,9 @@
 from collections import deque
 
 from IRootedGraph import RootedGraph
+from utilities import bfsSearch
 
+#implementation of dictionnary based graph - not different from the abstract class
 class DictRootedGraph(RootedGraph):
     def __init__(self):
         self.graph = dict()
@@ -24,27 +26,8 @@ class DictRootedGraph(RootedGraph):
                self.graph == other.graph and \
                self.roots == other.roots
 
-def bfsSearch(graph,query):
-    visited = set()
-    queue = deque()
 
-    for root in graph.getRoots():
-        queue.append(root)
-
-    while queue:
-        node = queue.popleft()
-        if node not in visited:
-            visited.add(node)
-            
-            if query(node):
-                return visited
-            
-            unvisited = [n for n in graph.getNeighbors(node) if n not in visited]
-            queue.extend(unvisited)
-
-    return visited
-
-
+#define a graph structure - just a test
 g = DictRootedGraph()
 g.add_edge(0, 1)
 g.add_edge(0, 2)
@@ -55,4 +38,5 @@ g.add_edge(2, 5)
 # Set roots as a list containing the single root node 0
 g.roots = [0]
 
+#perform the bfs search
 print(bfsSearch(g,lambda n: n>9))

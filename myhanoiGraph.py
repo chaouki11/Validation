@@ -2,8 +2,9 @@
 from collections import deque
 from IRootedGraph import RootedGraph
 from hanoiNode import HanoiConfig, isFinal
-from traceHanoi import print_trace_for_direct_solution
+from utilities import bfsSearch, print_trace_for_direct_solution
 
+#graph implementation with nodes as hanoi configuration
 class HanoiRG(RootedGraph):
     def __init__(self):
         self.graph = dict()
@@ -28,32 +29,14 @@ class HanoiRG(RootedGraph):
         return neighbors
     
 
-
-def bfsSearch(graph,query):
-    visited = set()
-    queue = deque()
-
-    for root in graph.getRoots():
-        queue.append(root)
-
-    while queue:
-        node = queue.popleft()
-        if node not in visited:
-            visited.add(node)
-            
-            if query(node):
-                return visited
-            
-            unvisited = [n for n in graph.getNeighbors(node) if n not in visited]
-            queue.extend(unvisited)
-
-    return visited
-
-
+#define a hanoiGraph
 gr=HanoiRG()
-#print(bfsSearch(gr,isFinal))
+
+#print the visited nodes when using the BFS search
 print("BFS search: \n\n")
 for e in bfsSearch(gr,isFinal):
     print(e.towers)
+
+#print the trace for finding the solutino  
 print("\n\nTrace : \n\n")
 print_trace_for_direct_solution(gr,isFinal)
