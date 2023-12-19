@@ -2,7 +2,8 @@
 from collections import deque
 from IRootedGraph import RootedGraph
 from hanoiNode import HanoiConfig, isFinal
-from utilities import bfsSearch, print_trace_for_direct_solution
+from ParentTraceur import ParentTraceur
+from utilities import bfsSearch, print_visited_nodes, printParents
 
 #graph implementation with nodes as hanoi configuration
 class HanoiRG(RootedGraph):
@@ -32,11 +33,22 @@ class HanoiRG(RootedGraph):
 #define a hanoiGraph
 gr=HanoiRG()
 
-#print the visited nodes when using the BFS search
-print("BFS search: \n\n")
-for e in bfsSearch(gr,isFinal):
-    print(e.towers)
+pr=ParentTraceur(gr)
 
+#parentTraceur(gr)
+
+R=bfsSearch(pr,isFinal,includeTrace=True)
+
+
+#print the visited nodes when using the BFS search
+print_visited_nodes(R)
 #print the trace for finding the solutino  
-print("\n\nTrace : \n\n")
-print_trace_for_direct_solution(gr,isFinal)
+#print_hanoi_trace_for_direct_solution(R)
+# parent_traceur(pr)
+# get_trace(R[1])
+
+print("-----------------")
+print("-----------------")
+print("-----------------")
+#fonction qui affiche la trace
+printParents(pr,R[1])
