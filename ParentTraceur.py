@@ -33,3 +33,13 @@ class ParentTraceur(RootedGraph):
             if self.parents.get(node) is None:
                 self.parents[node] = [n]
         return uneighbors
+    
+    def printParents(self,last):
+        lap=last
+        value=self.parents[last]
+
+        while value is not None and len(value) is not 0:
+            print(f"{lap.towers}: {value[0].towers}")
+
+            lap=value[0]
+            value=self.parents[lap]

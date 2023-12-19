@@ -104,12 +104,12 @@ def get_trace(self, node):
      
 
 #fonction qui affiche trace
-def printParents(gr,last):
-        lap=last
-        value=gr.parents[last]
+# def printParents(gr,last):
+#         lap=last
+#         value=gr.parents[last]
 
-        while value is not None and len(value) is not 0:
-            print(f"{lap.towers}: {value[0].towers}")
+#         while value is not None and len(value) is not 0:
+#             print(f"{lap.towers}: {value[0].towers}")
 
-            lap=value[0]
-            value=gr.parents[lap]
+#             lap=value[0]
+#             value=gr.parents[lap]
