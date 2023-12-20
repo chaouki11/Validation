@@ -6,11 +6,11 @@ from hanoiNode import isFinal
 from myhanoiGraph import HanoiRG
 from Semantic2RG import Semantic2RG
 from OneBitClock import OneBitClock
-from AliceEtBob import AliceAndBob
+from AliceEtBob import AliceAndBob1
 from utilities import bfsSearch, print_visited_nodes_hanoi
 
 ##########################################
-        #TEST PARENT TRACEUR#
+        #TEST PARENT TRACEUR#   #fonctionnel
 ##########################################
 
 # gr=HanoiRG()
@@ -27,7 +27,7 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 
 
 ##########################################
-        #TEST OneBitClock#
+        #TEST OneBitClock#      #fonctionnel
 ##########################################
 
 OneBitClockInstance=OneBitClock()
@@ -49,7 +49,7 @@ for e in R[0]:
         #TEST Alice et Bob#
 ##########################################
 
-aliceAndBobInstance=AliceAndBob()
+aliceAndBobInstance=AliceAndBob1()
 
 semantic2RGInstance=Semantic2RG(OneBitClockInstance)
 
