@@ -1,13 +1,12 @@
 
 from IRootedGraph import RootedGraph
 
-
 class Semantic2RG(RootedGraph):
 
-    def _init_(self, semantic):
+    def __init__(self, semantic):
         self.semantic = semantic
 
-    def getroots(self):
+    def getRoots(self):
         roots=self.semantic.initial()
         return roots
     

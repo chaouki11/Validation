@@ -4,7 +4,7 @@
 from collections import deque
 
 #traversal BFS
-def bfsSearch(graph, query,includeTrace=False):
+def bfsSearch(graph, query):
     visited = set()
     queue = deque()
 
@@ -24,7 +24,7 @@ def bfsSearch(graph, query,includeTrace=False):
     return visited,node
 
 #function to print the visited nodes
-def print_visited_nodes(searchResult):
+def print_visited_nodes_hanoi(searchResult):
     print("BFS search visited nodes: \n\n")
     for e in searchResult[0]:
             print(e.towers)

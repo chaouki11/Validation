@@ -3,7 +3,7 @@ from collections import deque
 from IRootedGraph import RootedGraph
 from hanoiNode import HanoiConfig, isFinal
 from ParentTraceur import ParentTraceur
-from utilities import bfsSearch, print_visited_nodes
+from utilities import bfsSearch, print_visited_nodes_hanoi
 
 #graph implementation with nodes as hanoi configuration
 class HanoiRG(RootedGraph):

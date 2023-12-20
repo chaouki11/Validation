@@ -1,16 +1,25 @@
 
 
-class OneBitClock():
+from Semantic import Semantic
+
+
+class OneBitClock(Semantic):
+
     def __init__(self):
         pass
 
     def initial(self):
-        pass
+        return [0,1]
 
     def actions(self, config):
-        pass
+        A=[]
+        if config==1:
+            A.append(lambda c: [0])
+        else: #config==0
+            A.append(lambda c: [1])
+        return A
 
-    def execute(self, config, action):
-        pass
+    def execute(self, action, config):
+        return action(config)
     
     

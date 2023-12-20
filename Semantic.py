@@ -1,5 +1,4 @@
 from IRootedGraph import abstractmethod
-from projets.validationGithub.Semantic import Semantic2RG
 
 
 class Semantic():

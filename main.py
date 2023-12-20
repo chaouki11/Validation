@@ -4,27 +4,59 @@
 from ParentTraceur import ParentTraceur
 from hanoiNode import isFinal
 from myhanoiGraph import HanoiRG
-from utilities import bfsSearch, print_visited_nodes
+from Semantic2RG import Semantic2RG
+from OneBitClock import OneBitClock
+from AliceEtBob import AliceAndBob
+from utilities import bfsSearch, print_visited_nodes_hanoi
+
+##########################################
+        #TEST PARENT TRACEUR#
+##########################################
+
+# gr=HanoiRG()
+# pr=ParentTraceur(gr)
+# R=bfsSearch(pr,isFinal)
+# print_visited_nodes_hanoi(R)
+# print("-----------------")
+# print("-----------------")
+# print("-----------------")
+# pr.printParents(R[1])
+
+##########################################
 
 
-gr=HanoiRG()
 
-pr=ParentTraceur(gr)
+##########################################
+        #TEST OneBitClock#
+##########################################
 
-#parentTraceur(gr)
+OneBitClockInstance=OneBitClock()
 
-R=bfsSearch(pr,isFinal,includeTrace=True)
+semantic2RGInstance=Semantic2RG(OneBitClockInstance)
+
+pr=ParentTraceur(semantic2RGInstance)
+
+R=bfsSearch(pr,lambda n: n==3)
+
+for e in R[0]:
+    print(e)
+##########################################
 
 
-#print the visited nodes when using the BFS search
-print_visited_nodes(R)
-#print the trace for finding the solutino  
-#print_hanoi_trace_for_direct_solution(R)
-# parent_traceur(pr)
-# get_trace(R[1])
 
-print("-----------------")
-print("-----------------")
-print("-----------------")
-#fonction qui affiche la trace
-pr.printParents(R[1])
+
+##########################################
+        #TEST Alice et Bob#
+##########################################
+
+aliceAndBobInstance=AliceAndBob()
+
+semantic2RGInstance=Semantic2RG(OneBitClockInstance)
+
+pr=ParentTraceur(semantic2RGInstance)
+
+R=bfsSearch(pr,isSolution)
+
+for e in R[0]:
+    print(e)
+##########################################
