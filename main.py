@@ -20,7 +20,7 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 # print("-----------------")
 # print("-----------------")
 # print("-----------------")
-# pr.printParents(R[1])
+# pr.printParents(R[0])
 
 ##########################################
 
@@ -30,16 +30,16 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
         #TEST OneBitClock#      #fonctionnel
 ##########################################
 
-OneBitClockInstance=OneBitClock()
+# OneBitClockInstance=OneBitClock()
 
-semantic2RGInstance=Semantic2RG(OneBitClockInstance)
+# semantic2RGInstance=Semantic2RG(OneBitClockInstance)
 
-pr=ParentTraceur(semantic2RGInstance)
+# pr=ParentTraceur(semantic2RGInstance)
 
-R=bfsSearch(pr,lambda n: n==3)
+# R=bfsSearch(pr,lambda n: n==3)
 
-for e in R[0]:
-    print(e)
+# for e in R[1]:
+#     print(e)
 ##########################################
 
 
@@ -51,12 +51,12 @@ for e in R[0]:
 
 aliceAndBobInstance=AliceAndBob1()
 
-semantic2RGInstance=Semantic2RG(OneBitClockInstance)
+semantic2RGInstance=Semantic2RG(aliceAndBobInstance)
 
 pr=ParentTraceur(semantic2RGInstance)
 
-R=bfsSearch(pr,isSolution)
+R=bfsSearch(pr,lambda n: n[0]=="EnSectionCritiqueAlice" and n[1]=="EnSectionCritiqueBob")
 
-for e in R[0]:
+for e in R[1]:
     print(e)
 ##########################################

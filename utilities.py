@@ -17,14 +17,14 @@ def bfsSearch(graph, query):
             visited.add(node)
 
             if query(node):
-                return visited,node
+                return node,visited
 
             unvisited = [n for n in graph.getNeighbors(node) if n not in visited]
             queue.extend(unvisited)
-    return visited,node
+    return None,visited
 
 #function to print the visited nodes
 def print_visited_nodes_hanoi(searchResult):
     print("BFS search visited nodes: \n\n")
-    for e in searchResult[0]:
+    for e in searchResult[1]:
             print(e.towers)
