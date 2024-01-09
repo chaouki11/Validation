@@ -21,12 +21,21 @@ class ParentTraceur(RootedGraph):
                 self.parents[node] = [n]
         return uneighbors
 
-    def printParents(self,last):    #get_trace
+    def printParentsHanoi(self,last):    #get_trace
         print("Trace:\n")
         lap=last
         value=self.parents[last]
         while value is not None and len(value) is not 0:
             print(f"{lap.towers}: {value[0].towers}")
 
+            lap=value[0]
+            value=self.parents[lap]
+
+    def printParentsABV1(self,last):    #get_trace
+        print("Trace:\n")
+        lap=last
+        value=self.parents[last]
+        while value is not None and len(value) is not 0:
+            print(f"{lap}: {value}")
             lap=value[0]
             value=self.parents[lap]

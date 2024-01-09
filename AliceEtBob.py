@@ -13,26 +13,52 @@ class AliceAndBob1(Semantic):
 
     def actions(self, config):
         a=[]
-        if random.random() < 0.5: #alice moves
-            print("moma ")
-            print(type(config))
-            node,b=config
-            print("alice moves with : "+b)
-            if node == "initialAlice":
-                a.append(lambda x: ("attendAlice",b))
-            elif node == "attendAlice":
-                a.append(lambda x: ("EnSectionCritiqueAlice",b))
-            elif node == "EnSectionCritiqueAlice":
-                a.append(lambda x: ("initialAlice",b))
-        else:#bob moves
-            al,node=config
-            print("bob moves with : "+al)
-            if node == "initialBob":
-                a.append(lambda x: (al,"attendBob"))
-            elif node == "attendBob":
-                a.append(lambda x: (al,"EnSectionCritiqueBob"))
-            elif node == "EnSectionCritiqueBob":
-                a.append(lambda x: (al,"initialBob"))
+        print("start ")
+        print(config)
+        # if random.random() < 0.5: #alice moves
+        #     # print("moma ")
+        #     # print(type(config))
+        #     al,b=config
+        #     print("alice moves")
+        #     if al == "initialAlice":
+        #         a.append(lambda x: [("attendAlice",b)])
+        #     elif al == "attendAlice":
+        #         a.append(lambda x: [("EnSectionCritiqueAlice",b)])
+        #     elif al == "EnSectionCritiqueAlice":
+        #         a.append(lambda x: [("initialAlice",b)])
+        # else:#bob moves
+        #     al,b=config
+        #     print("bob moves")
+        #     if b == "initialBob":
+        #         a.append(lambda x: [(al,"attendBob")])
+        #     elif b == "attendBob":
+        #         a.append(lambda x: [(al,"EnSectionCritiqueBob")])
+        #     elif b == "EnSectionCritiqueBob":
+        #         a.append(lambda x: [(al,"initialBob")])
+        # print("end ")
+
+
+        #test 2
+
+        
+        al,b=config
+        # print("alice moves")
+        if al == "initialAlice":
+            a.append(lambda x: [("attendAlice",b)])
+        elif al == "attendAlice":
+            a.append(lambda x: [("EnSectionCritiqueAlice",b)])
+        elif al == "EnSectionCritiqueAlice":
+            a.append(lambda x: [("initialAlice",b)])
+    
+        # print("bob moves")
+        if b == "initialBob":
+            a.append(lambda x: [(al,"attendBob")])
+        elif b == "attendBob":
+            a.append(lambda x: [(al,"EnSectionCritiqueBob")])
+        elif b == "EnSectionCritiqueBob":
+            a.append(lambda x: [(al,"initialBob")])
+        print("end ")
+
         return a
 
     def execute(self, action, config):

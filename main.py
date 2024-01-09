@@ -20,7 +20,7 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 # print("-----------------")
 # print("-----------------")
 # print("-----------------")
-# pr.printParents(R[0])
+# pr.printParentsHanoi(R[0])
 
 ##########################################
 
@@ -46,7 +46,7 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 
 
 ##########################################
-        #TEST Alice et Bob#
+        #TEST Alice et Bob v1#  #fonctionnel
 ##########################################
 
 aliceAndBobInstance=AliceAndBob1()
@@ -59,4 +59,11 @@ R=bfsSearch(pr,lambda n: n[0]=="EnSectionCritiqueAlice" and n[1]=="EnSectionCrit
 
 for e in R[1]:
     print(e)
+
+print("------------")
+print("------------")
+print()
+pr.printParentsABV1(R[0])
+
+
 ##########################################
