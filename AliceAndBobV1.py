@@ -2,11 +2,11 @@ import random
 from Semantic import Semantic
 
 
-class AliceAndBob0(Semantic):
+class AliceAndBobV1(Semantic):
 
     def __init__(self):
-        self.sA=0   #sA représente l'état actuel de Alice: 0:initial 1:attente 2:critique
-        self.sB=0
+        self.fA=0   #flag
+        self.fB=0
 
     def initial(self):
         return [("initialAlice", "initialBob")]
@@ -45,18 +45,22 @@ class AliceAndBob0(Semantic):
         # print("alice moves")
         if al == "initialAlice":
             a.append(lambda x: [("attendAlice",b)])
-        elif al == "attendAlice":
+            self.fA=1
+        elif al == "attendAlice" and self.fB==0:
             a.append(lambda x: [("EnSectionCritiqueAlice",b)])
         elif al == "EnSectionCritiqueAlice":
             a.append(lambda x: [("initialAlice",b)])
+            self.fA=0
     
         # print("bob moves")
         if b == "initialBob":
             a.append(lambda x: [(al,"attendBob")])
-        elif b == "attendBob":
+            self.fB=1
+        elif b == "attendBob" and self.fA==0:
             a.append(lambda x: [(al,"EnSectionCritiqueBob")])
         elif b == "EnSectionCritiqueBob":
             a.append(lambda x: [(al,"initialBob")])
+            self.fB=0
         print("end ")
 
         return a
