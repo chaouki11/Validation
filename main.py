@@ -8,6 +8,7 @@ from Semantic2RG import Semantic2RG
 from OneBitClock import OneBitClock
 from AliceEtBob import AliceAndBob0
 from AliceAndBobV1 import AliceAndBobV1
+from SoupLangage import Piece, SoupSemantics, SoupSpecification
 from utilities import bfsSearch, print_visited_nodes_hanoi
 
 ##########################################
@@ -77,21 +78,38 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
         #TEST Alice et Bob v1#  #a completer
 ##########################################
 
-aliceAndBobInstance=AliceAndBobV1()
+# aliceAndBobInstance=AliceAndBobV1()
 
-semantic2RGInstance=Semantic2RG(aliceAndBobInstance)
+# semantic2RGInstance=Semantic2RG(aliceAndBobInstance)
 
-pr=ParentTraceur(semantic2RGInstance)
+# pr=ParentTraceur(semantic2RGInstance)
 
-R=bfsSearch(pr,lambda n: n[0]=="attendAlice" and n[1]=="attendBob")     #la query ne permet pas vraiment de detecter un deadlock how to avec seulement le noeud en parametre, Mais puisqu'on connais deja le couple d'etat ou on a deadlock, on specifie ce couple de facon explicite
+# R=bfsSearch(pr,lambda n: not (semantic2RGInstance.getNeighbors(n)))   #detecter deadlock
+# for e in R[1]:
+#     print(e)
 
-for e in R[1]:
-    print(e)
+# print("------------")
+# print("------------")
+# print()
+# pr.printParentsABV1(R[0])
 
-print("------------")
-print("------------")
-print()
-pr.printParentsABV1(R[0])
+
+##########################################
+
+
+
+
+##########################################
+        #TEST Soup langage 
+##########################################
+
+p1=Piece("nom1",lambda x: 1!=0,lambda x: print("nom 1"))
+p2=Piece("nom2",lambda x: 1!=0,lambda x: print("nom 2"))
+
+soup=SoupSpecification()
+soupSem=SoupSemantics(soup)
+s=Semantic2RG(soupSem)
+
 
 
 ##########################################
