@@ -1,4 +1,5 @@
 from abc import ABC
+import copy
 
 from Semantic import Semantic
 
@@ -13,7 +14,7 @@ class SoupConfiguration(ABC):
         pass
 
 
-class Piece(SoupConfiguration):
+class Piece:    #(SoupConfiguration)
     def __init__(self, nom, garde, action):
         self.nom = nom
         self.garde = garde
@@ -22,13 +23,13 @@ class Piece(SoupConfiguration):
     def enabled(self,c):
         return self.garde(c)
 
-    def execute(self,c):
-        return [self.action(c)]
+    # def execute(self,c):
+    #     return [self.action(c)]
 
 
 class SoupSpecification:
 
-    def __init__(self, pieces,initials):
+    def __init__(self, initials,pieces):
         self.initials=initials #list de SoupConfiguration
         self.pieces_list = pieces #liste de pieces
 
@@ -39,12 +40,12 @@ class SoupSpecification:
         return self.pieces_list
     
     def enabledPieces(self,c):
-        filtered_pieces = list(filter(lambda p: p.enabled(c), self.pieces))
+        filtered_pieces = list(filter(lambda p: p.enabled(c), self.pieces_list))
         return filtered_pieces
 
 
 class SoupSemantics(Semantic):
-    def _init_(self, spec):
+    def __init__(self, spec):
         self.spec = spec
 
     def initial(self):
@@ -54,5 +55,6 @@ class SoupSemantics(Semantic):
         return self.spec.enabledPieces(config)
     
     def execute(self,piece, config):
-        return piece.action(config)
+        to_target = copy.deepcopy(config)
+        return [piece.action(to_target)]
     
