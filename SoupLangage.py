@@ -13,7 +13,7 @@ class SoupConfiguration(ABC):
         pass
 
 
-class Piece:
+class Piece(SoupConfiguration):
     def __init__(self, nom, garde, action):
         self.nom = nom
         self.garde = garde
@@ -23,22 +23,22 @@ class Piece:
         return self.garde(c)
 
     def execute(self,c):
-        return self.action(c)
+        return [self.action(c)]
 
 
 class SoupSpecification:
 
     def __init__(self, pieces,initials):
-        self.initials=initials
+        self.initials=initials #list de SoupConfiguration
         self.pieces_list = pieces #liste de pieces
 
     def initial(self): #list de SoupConfiguration
-        return initials
+        return self.initials
     
-    def pieces(self): #liste de pieces  #utilisé ou?
-        return []
+    def pieces(self): #liste de pieces
+        return self.pieces_list
     
-    def enabledPieces(self,c):#faux
+    def enabledPieces(self,c):
         filtered_pieces = list(filter(lambda p: p.enabled(c), self.pieces))
         return filtered_pieces
 
@@ -50,9 +50,9 @@ class SoupSemantics(Semantic):
     def initial(self):
         return self.spec.initial()
 
-    def actions(self, config):#faux
-        return self.spec.enabledPieces(config.garde)
+    def actions(self, config):
+        return self.spec.enabledPieces(config)
     
-    def execute(self,action, config):
-        return action(config)
+    def execute(self,piece, config):
+        return piece.action(config)
     

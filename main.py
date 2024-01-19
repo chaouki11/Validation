@@ -75,7 +75,7 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 
 
 ##########################################
-        #TEST Alice et Bob v1#  #a completer
+        #TEST Alice et Bob v1#  #fonctionnel
 ##########################################
 
 # aliceAndBobInstance=AliceAndBobV1()
@@ -109,7 +109,7 @@ p2=Piece("nom2",lambda x: 1!=0,lambda x: print("nom 2"))
 soup=SoupSpecification()
 soupSem=SoupSemantics(soup)
 s=Semantic2RG(soupSem)
-
+R=bfsSearch(s,lambda n: n)
 
 
 ##########################################
