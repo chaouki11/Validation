@@ -12,6 +12,7 @@ from AliceAndBobV1 import AliceAndBobV1
 from SoupLangage import Piece, SoupSemantics, SoupSpecification
 from AliceBobSoupConfig import AliceBobConf
 from AliceBobSOupConfigV1 import AliceBobConfV1
+from HanoiSoupConfig import HanoiSoupConfig
 from utilities import bfsSearch, print_visited_nodes_hanoi
 
 ##########################################
@@ -153,51 +154,98 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
         #TEST Soup langage AlicebobV1 avec soup #fonctionnel
 ##########################################
 
-def p1a_a(x,op):
-    if op==0:# for alice
-        if x.state_Alice==0:
-            x.flag_Alice=1
-        x.state_Alice=(x.state_Alice+1)%3
-        if x.state_Alice==0:
-            x.flag_Alice=0
-        return x
-    else:#for bob
-        if x.state_Bob==0:
-            x.flag_Bob=1
-        x.state_Bob=(x.state_Bob+1)%3
-        if x.state_Bob==0:
-            x.flag_Bob=0
-        return x
+# def p1a_a(x,op):
+#     if op==0:# for alice
+#         if x.state_Alice==0:
+#             x.flag_Alice=1
+#         x.state_Alice=(x.state_Alice+1)%3
+#         if x.state_Alice==0:
+#             x.flag_Alice=0
+#         return x
+#     else:#for bob
+#         if x.state_Bob==0:
+#             x.flag_Bob=1
+#         x.state_Bob=(x.state_Bob+1)%3
+#         if x.state_Bob==0:
+#             x.flag_Bob=0
+#         return x
     
 
-p1a=Piece("Alice veux",lambda x: x.state_Alice==0,lambda x: p1a_a(x,0))
-p2a=Piece("Alice entre",lambda x: x.flag_Bob==0,lambda x: p1a_a(x,0))
-p3a=Piece("Alice sort",lambda x: x.state_Alice==2,lambda x: p1a_a(x,0))
-p1b=Piece("Bob veux",lambda x: x.state_Bob==0,lambda x: p1a_a(x,1))
-p2b=Piece("Bob entre",lambda x:x.flag_Alice==0,lambda x: p1a_a(x,1))
-p3b=Piece("Bob sort",lambda x: x.state_Bob==2,lambda x: p1a_a(x,1))
-Lp=[p1a,p2a,p3a,p1b,p2b,p3b]
-random.shuffle(Lp)
+# p1a=Piece("Alice veux",lambda x: x.state_Alice==0,lambda x: p1a_a(x,0))
+# p2a=Piece("Alice entre",lambda x: x.flag_Bob==0,lambda x: p1a_a(x,0))
+# p3a=Piece("Alice sort",lambda x: x.state_Alice==2,lambda x: p1a_a(x,0))
+# p1b=Piece("Bob veux",lambda x: x.state_Bob==0,lambda x: p1a_a(x,1))
+# p2b=Piece("Bob entre",lambda x:x.flag_Alice==0,lambda x: p1a_a(x,1))
+# p3b=Piece("Bob sort",lambda x: x.state_Bob==2,lambda x: p1a_a(x,1))
+# Lp=[p1a,p2a,p3a,p1b,p2b,p3b]
+# random.shuffle(Lp)
 
-initials=[AliceBobConfV1()]
-soup=SoupSpecification(initials,Lp)
-soupSem=SoupSemantics(soup)
-s=Semantic2RG(soupSem)
-pr=ParentTraceur(s)
-R=bfsSearch(pr,lambda n: not(s.getNeighbors(n)))
+# initials=[AliceBobConfV1()]
+# soup=SoupSpecification(initials,Lp)
+# soupSem=SoupSemantics(soup)
+# s=Semantic2RG(soupSem)
+# pr=ParentTraceur(s)
+# R=bfsSearch(pr,lambda n: not(s.getNeighbors(n)))
 
-print("------------")
-print("---- chemin BFS----")
-print()
+# print("------------")
+# print("---- chemin BFS----")
+# print()
 
-for e in R[1]:
-    print(e)
+# for e in R[1]:
+#     print(e)
 
-print("------------")
-print("---- Trace ----")
-print()
+# print("------------")
+# print("---- Trace ----")
+# print()
 
-pr.printParentsABSoup(R[0])
+# pr.printParentsABSoup(R[0])
 
 ##########################################
+
+
+
+
+##########################################
+        #TEST Soup Hanoi    #fonctionnel
+##########################################
+
+# def hpa(x,source,destination):
+#     return x.move_disk(source, destination)
+
+# def hgarde(x,source,destination):
+#     if source != destination and x.can_move(source, destination):
+#         return True
+#     return False
+
+# gardes=[(lambda x,i=i,j=j:hgarde(x,i,j)) for i in range(3) for j in range(3) if i!=j]
+# actions=[(lambda x,i=i,j=j:hpa(x,i,j)) for i in range(3) for j in range(3) if i!=j]
+
+# initials=[HanoiSoupConfig(3)]
+# #print(hpa(HanoiSoupConfig(3),0,1))
+# Lp=[Piece("deplacement disque: ",gardes[k],actions[k]) for k in range(len(actions))]
+
+# soup=SoupSpecification(initials,Lp)
+# soupSem=SoupSemantics(soup)
+# s=Semantic2RG(soupSem)
+# pr=ParentTraceur(s)
+# R=bfsSearch(pr,lambda n:isFinal(n))
+
+
+
+# print("------------")
+# print("---- chemin BFS----")
+# print()
+
+# for e in R[1]:
+#     print(e)
+
+
+# print("------------")
+# print("---- Trace ----")
+# print()
+# pr.printParentsHanoi(R[0])
+
+
+##########################################
+
 

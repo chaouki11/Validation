@@ -23,9 +23,6 @@ class Piece:    #(SoupConfiguration)
     def enabled(self,c):
         return self.garde(c)
 
-    # def execute(self,c):
-    #     return [self.action(c)]
-
 
 class SoupSpecification:
 
@@ -40,7 +37,7 @@ class SoupSpecification:
         return self.pieces_list
     
     def enabledPieces(self,c):
-        filtered_pieces = list(filter(lambda p: p.enabled(c), self.pieces_list))
+        filtered_pieces = list(filter(lambda p: p.enabled(c),self.pieces_list))
         return filtered_pieces
 
 
