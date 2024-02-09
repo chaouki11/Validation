@@ -17,7 +17,7 @@ class StepSynchComposition(Semantic):
     def actions(self, source):
         lhs_source,rhs_source=source
         syncActions = []
-        lhs_actions = self.actions(lhs_source)
+        lhs_actions = self.lhs.actions(lhs_source)
         action_count = len(lhs_actions)
         for lhs_action in lhs_actions:
             lhs_targets = self.lhs.execute(lhs_action, lhs_source)
@@ -31,15 +31,14 @@ class StepSynchComposition(Semantic):
 
         if action_count==0:
             lhs_step=lhs_source,"deadlock",lhs_source
-            rhs_actions=self.rhs.actions(lhs_step,lhs_source)
+            rhs_actions=self.rhs.actions(lhs_step,rhs_source)
             syncActions.extend(lambda rA: (lhs_step,rA),rhs_actions)
 
         return syncActions
 
-    def execute(self,action, source):
+    def execute(self,action, source):#might need to clear the confusion between the action and the piece
         lhs_step,rhs_action=action
         lhs_source,rhs_source=source
         rhs_targets=self.rhs.execute(rhs_action,lhs_step,rhs_source)
 
-
-        return map(lambda rhs_target:lhs_step[2],rhs_targets)
+        return map(lambda rhs_target:(lhs_step[2],rhs_target),rhs_targets)

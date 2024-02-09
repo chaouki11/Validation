@@ -13,6 +13,8 @@ from SoupLangage import Piece, SoupSemantics, SoupSpecification
 from AliceBobSoupConfig import AliceBobConf
 from AliceBobSOupConfigV1 import AliceBobConfV1
 from HanoiSoupConfig import HanoiSoupConfig
+from DependantSemantics import DependantSoupSemantics
+from StepSyncComposition import StepSynchComposition
 from utilities import bfsSearch, print_visited_nodes_hanoi
 
 ##########################################
@@ -244,6 +246,51 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 # print("---- Trace ----")
 # print()
 # pr.printParentsHanoi(R[0])
+
+
+##########################################
+
+
+
+
+##########################################
+        #TEST propriété et composition    #à compléter
+##########################################
+
+
+#lhs=model(alice et bob)
+#rhs=propriété(bucchi)
+#car propriete depend du model et rhs depend de lhs
+lhs=SoupSpecification(initials1,Lp1)
+rhs_soup=SoupSpecification(initials2,Lp2)
+rhs=DependantSoupSemantics(rhs_soup)
+dss=StepSynchComposition(lhs,rhs)
+s=Semantic2RG(dss)
+pr=ParentTraceur(s)
+R=bfsSearch(pr,lambda n:n)
+
+
+
+
+
+
+##########################################
+
+
+
+
+
+##########################################
+        #TEST detection de tagged cycles    #a faire
+##########################################
+
+
+
+
+
+
+
+
 
 
 ##########################################
