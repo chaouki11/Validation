@@ -2,7 +2,7 @@
 from Semantic import Semantic
  
 class StepSynchComposition(Semantic):
-    def _init_(self, lhs, rhs):
+    def __init__(self, lhs, rhs):
         self.lhs = lhs
         self.rhs = rhs
 

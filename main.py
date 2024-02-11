@@ -15,6 +15,7 @@ from AliceBobSOupConfigV1 import AliceBobConfV1
 from HanoiSoupConfig import HanoiSoupConfig
 from DependantSemantics import DependantSoupSemantics
 from StepSyncComposition import StepSynchComposition
+from AliceBobPetersonConfig import AliceBobPeterson
 from utilities import bfsSearch, print_visited_nodes_hanoi
 
 ##########################################
@@ -251,33 +252,220 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 ##########################################
 
 
+##########################################
+        #TEST Alice Bob V2 (bob donne priorité à alice) soup
+##########################################
+
+# def p1a_a(x,op):
+#     if op==0:# for alice
+#         if x.state_Alice==0:
+#             x.flag_Alice=1
+#         x.state_Alice=(x.state_Alice+1)%3
+#         if x.state_Alice==0:
+#             x.flag_Alice=0
+#         return x
+#     else:#for bob
+#         if x.state_Bob==0:
+#             x.flag_Bob=1
+#         x.state_Bob=(x.state_Bob+1)%3
+#         if x.state_Bob==0:
+#             x.flag_Bob=0
+#         return x
+
+
+# def descflag(x):
+#     x.flag_Bob=0
+#     x.state_Bobe=1
+#     return x
+
+# p1a=Piece("Alice veux",lambda x: x.state_Alice==0,lambda x: p1a_a(x,0))
+# p2a=Piece("Alice entre",lambda x: x.flag_Bob==0,lambda x: p1a_a(x,0))
+# p3a=Piece("Alice sort",lambda x: x.state_Alice==2,lambda x: p1a_a(x,0))
+# p1b=Piece("Bob veux",lambda x: x.state_Bob==0,lambda x: p1a_a(x,1))
+# p2b=Piece("Bob entre",lambda x:x.flag_Alice==0,lambda x: p1a_a(x,1))
+# p3b=Piece("Bob sort",lambda x: x.state_Bob==2,lambda x: p1a_a(x,1))
+# p4b=Piece("Bob descend flag",lambda x: x.flag_Alice==1 and x.flag_Bob==1,lambda x: descflag(x))
+
+# Lp=[p1a,p2a,p3a,p1b,p2b,p3b,p4b]
+# random.shuffle(Lp)
+
+# initials=[AliceBobConfV1()]
+# soup=SoupSpecification(initials,Lp)
+# soupSem=SoupSemantics(soup)
+# s=Semantic2RG(soupSem)
+# pr=ParentTraceur(s)
+# R=bfsSearch(pr,lambda n: not(s.getNeighbors(n)))
+
+# print("------------")
+# print("---- chemin BFS----")
+# print()
+
+# for e in R[1]:
+#     print(e)
+
+# # print("------------")
+# # print("---- Trace ----")
+# # print()
+
+# # # executer le parent traceur  donne une erreur quand car il ya plus de deadlock
+# # pr.printParentsABSoup(R[0])
+
+
 
 
 ##########################################
-        #TEST propriété et composition    #à compléter
+
+##########################################
+        #TEST AliceBob peterson
 ##########################################
 
 
-#lhs=model(alice et bob)
-#rhs=propriété(bucchi)
-#car propriete depend du model et rhs depend de lhs
-lhs=SoupSpecification(initials1,Lp1)
-rhs_soup=SoupSpecification(initials2,Lp2)
-rhs=DependantSoupSemantics(rhs_soup)
-dss=StepSynchComposition(lhs,rhs)
-s=Semantic2RG(dss)
-pr=ParentTraceur(s)
-R=bfsSearch(pr,lambda n:n)
+# def p1a_a(x,op):
+#     if op==0:# for alice
+#         if x.state_Alice==0:
+#             x.flag_Alice=1
+#             x.turn=1
+#         x.state_Alice=(x.state_Alice+1)%3
+#         if x.state_Alice==0:
+#             x.flag_Alice=0
+#         return x
+#     else:#for bob
+#         if x.state_Bob==0:
+#             x.flag_Bob=1
+#             x.turn=0
+#         x.state_Bob=(x.state_Bob+1)%3
+#         if x.state_Bob==0:
+#             x.flag_Bob=0
+#         return x
 
+# p1a=Piece("Alice veux",lambda x: x.state_Alice==0,lambda x: p1a_a(x,0))
+# p2a=Piece("Alice entre",lambda x: x.flag_Bob==0 or x.turn==0,lambda x: p1a_a(x,0))
+# p3a=Piece("Alice sort",lambda x: x.state_Alice==2,lambda x: p1a_a(x,0))
 
+# p1b=Piece("Bob veux",lambda x: x.state_Bob==0,lambda x: p1a_a(x,1))
+# p2b=Piece("Bob entre",lambda x:x.flag_Alice==0 or x.turn==1,lambda x: p1a_a(x,1))
+# p3b=Piece("Bob sort",lambda x: x.state_Bob==2,lambda x: p1a_a(x,1))
 
+# Lp=[p1a,p2a,p3a,p1b,p2b,p3b]
+# random.shuffle(Lp)
 
+# initials=[AliceBobPeterson()]
+# soup=SoupSpecification(initials,Lp)
+# soupSem=SoupSemantics(soup)
+# s=Semantic2RG(soupSem)
+# pr=ParentTraceur(s)
+# R=bfsSearch(pr,lambda n: not(s.getNeighbors(n)))
+
+# print("------------")
+# print("---- chemin BFS----")
+# print()
+
+# for e in R[1]:
+#     print(e)
+
+# # print("------------")
+# # print("---- Trace ----")
+# # print()
+
+# # # executer le parent traceur  donne une erreur quand car il ya plus de deadlock 
+# # pr.printParentsABSoup(R[0])
 
 
 ##########################################
 
 
+##########################################
+        #TEST propriété et composition  alicebob peterson       #A COMPLETER
+##########################################
 
+# -----------------------
+# test avec lhs = alicebob peterson
+# -----------------------
+
+
+# def p1a_a(x,op):
+#     if op==0:# for alice
+#         if x.state_Alice==0:
+#             x.flag_Alice=1
+#             x.turn=1
+#         x.state_Alice=(x.state_Alice+1)%3
+#         if x.state_Alice==0:
+#             x.flag_Alice=0
+#         return x
+#     else:#for bob
+#         if x.state_Bob==0:
+#             x.flag_Bob=1
+#             x.turn=0
+#         x.state_Bob=(x.state_Bob+1)%3
+#         if x.state_Bob==0:
+#             x.flag_Bob=0
+#         return x
+
+# p1a=Piece("Alice veux",lambda x: x.state_Alice==0,lambda x: p1a_a(x,0))
+# p2a=Piece("Alice entre",lambda x: x.flag_Bob==0 or x.turn==0,lambda x: p1a_a(x,0))
+# p3a=Piece("Alice sort",lambda x: x.state_Alice==2,lambda x: p1a_a(x,0))
+
+# p1b=Piece("Bob veux",lambda x: x.state_Bob==0,lambda x: p1a_a(x,1))
+# p2b=Piece("Bob entre",lambda x:x.flag_Alice==0 or x.turn==1,lambda x: p1a_a(x,1))
+# p3b=Piece("Bob sort",lambda x: x.state_Bob==2,lambda x: p1a_a(x,1))
+
+# Lp1=[p1a,p2a,p3a,p1b,p2b,p3b]
+# random.shuffle(Lp1)
+
+# initials1=[AliceBobPeterson()]
+
+# #-----------------------
+
+# # propriété de bucchi rhs:
+
+# class PropBucchi:
+#     def __init__(self):
+#         self.state=0 # x=0, y=1
+
+#     def __str__(self):
+#         return "bucchi state: "+str(self.state)
+
+
+# def buchi_action(x):
+#     if x.state==1:
+#         x.state=0
+#     return x
+
+# #a corriger: garde bucchi prend 2 paramtre (input,configBucchi) où input=(source,action,target) de lhs
+# pb1=Piece("bucchi piece",lambda x: not(x.state_Alice==2 or x.state_Bob==2),lambda x: buchi_action(x))    
+# pb2=Piece("bucchi piece",lambda x: not(x.state_Alice==2 or x.state_Bob==2),lambda x: x)    
+# pb3=Piece("bucchi piece",lambda x: (x.state_Alice==2 or x.state_Bob==2),lambda x: x)    
+# Lp2=[pb1,pb2,pb3]
+# initials2=[PropBucchi()]
+
+# #-----------------------
+
+# #lhs=model(alice et bob)
+# #rhs=propriété(bucchi)
+# #car propriete depend du model et rhs depend de lhs
+# lhsspe=SoupSpecification(initials1,Lp1)
+# lhs=SoupSemantics(lhsspe)
+# rhs_soup=SoupSpecification(initials2,Lp2)
+# rhs=DependantSoupSemantics(rhs_soup)
+# dss=StepSynchComposition(lhs,rhs)
+# s=Semantic2RG(dss)
+# pr=ParentTraceur(s)
+# # R=bfsSearch(pr,lambda n:not(s.getNeighbors(n)))
+# R=bfsSearch(pr,lambda n:n)
+
+
+# for e in R[1]:
+#     print(e[0])
+#     print(e[1])
+
+
+# # print("------------")
+# # print("---- Trace ----")
+# # print()
+# # pr.printParentsHanoi(R[0])
+
+
+##########################################
 
 
 ##########################################
