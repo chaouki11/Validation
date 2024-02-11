@@ -9,14 +9,14 @@ from Semantic2RG import Semantic2RG
 from OneBitClock import OneBitClock
 from AliceEtBob import AliceAndBob0
 from AliceAndBobV1 import AliceAndBobV1
-from SoupLangage import Piece, SoupSemantics, SoupSpecification
+from SoupLangage import Piece, SoupConfiguration, SoupSemantics, SoupSpecification
 from AliceBobSoupConfig import AliceBobConf
 from AliceBobSOupConfigV1 import AliceBobConfV1
 from HanoiSoupConfig import HanoiSoupConfig
 from DependantSemantics import DependantSoupSemantics
 from StepSyncComposition import StepSynchComposition
 from AliceBobPetersonConfig import AliceBobPeterson
-from utilities import bfsSearch, print_visited_nodes_hanoi
+from utilities import bfsSearch, cycledetect, print_visited_nodes_hanoi
 
 ##########################################
         #TEST PARENT TRACEUR#   #fonctionnel
@@ -375,7 +375,7 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 
 
 ##########################################
-        #TEST propriété et composition  alicebob peterson       #A COMPLETER
+        #TEST propriété et composition  alicebob peterson       #INCOMPLET
 ##########################################
 
 # -----------------------
@@ -432,9 +432,9 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 #     return x
 
 # #a corriger: garde bucchi prend 2 paramtre (input,configBucchi) où input=(source,action,target) de lhs
-# pb1=Piece("bucchi piece",lambda x: not(x.state_Alice==2 or x.state_Bob==2),lambda x: buchi_action(x))    
-# pb2=Piece("bucchi piece",lambda x: not(x.state_Alice==2 or x.state_Bob==2),lambda x: x)    
-# pb3=Piece("bucchi piece",lambda x: (x.state_Alice==2 or x.state_Bob==2),lambda x: x)    
+# pb1=Piece("bucchi piece",lambda y,x: not(y[2].state_Alice==2 or y[2].state_Bob==2),lambda y,x: buchi_action(x))    
+# pb2=Piece("bucchi piece",lambda y,x: not(y[2].state_Alice==2 or y[2].state_Bob==2),lambda y,x: x)    
+# pb3=Piece("bucchi piece",lambda y,x: (y[2].state_Alice==2 or y[2].state_Bob==2),lambda y,x: x)    
 # Lp2=[pb1,pb2,pb3]
 # initials2=[PropBucchi()]
 
@@ -451,28 +451,69 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 # s=Semantic2RG(dss)
 # pr=ParentTraceur(s)
 # # R=bfsSearch(pr,lambda n:not(s.getNeighbors(n)))
-# R=bfsSearch(pr,lambda n:n)
+# # R=bfsSearch(pr,lambda n:n)
+# R=bfsSearch(pr,lambda n:n[1].state==1)
 
 
-# for e in R[1]:
-#     print(e[0])
-#     print(e[1])
+# # for e in R[1]:
+# #     print(e[0])
+# #     print(e[1])
 
-
-# # print("------------")
-# # print("---- Trace ----")
-# # print()
-# # pr.printParentsHanoi(R[0])
 
 
 ##########################################
 
 
 ##########################################
-        #TEST detection de tagged cycles    #a faire
+        #TEST detection de tagged cycles        #INCOMPLET
 ##########################################
 
 
+# class Myconf(SoupConfiguration):
+#     def __init__(self):
+#         self.state=0 #0,1,2
+        
+#     def __hash__(self):
+#         return hash(self.state)
+
+#     def __eq__(self, other):
+#         return self.state==other.state
+
+#     def __str__(self):
+#         return "state"+str(self.state)
+
+
+# def restate(x,v):
+#     x.state=v
+#     return x
+    
+
+# pb1=Piece("movement",lambda x:x.state==0,lambda x: restate(x,1))    
+# pb2=Piece("movement",lambda x:x.state==1,lambda x: restate(x,2))   
+# pb3=Piece("movement",lambda x:x.state==2,lambda x: restate(x,0))   
+# pb4=Piece("movement",lambda x:x.state==2,lambda x: restate(x,2))#on crée une boucle
+
+# Lp=[pb1,pb2,pb3,pb4]
+# initials=[Myconf()]
+# soup=SoupSpecification(initials,Lp)
+# soupSem=SoupSemantics(soup)
+# s=Semantic2RG(soupSem)
+# pr=ParentTraceur(s)
+
+# R=bfsSearch(pr,lambda n:n in pr.getNeighbors(n))
+# #le noeud solution est un noeud qui appartient à une boucle
+
+# print(R[0])
+
+
+
+# ##########################################
+
+# #pour détecter un cyle:
+# cycledetect(pr)
+
+
+# R=bfsSearch(pr,lambda n:n in bfsSearch(pr,lambda n:n)[1])
 
 
 
@@ -481,6 +522,9 @@ from utilities import bfsSearch, print_visited_nodes_hanoi
 
 
 
-##########################################
+
+
+
+
 
 

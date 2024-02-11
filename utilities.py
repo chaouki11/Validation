@@ -28,3 +28,14 @@ def print_visited_nodes_hanoi(searchResult):
     print("BFS search visited nodes: \n\n")
     for e in searchResult[1]:
             print(e.towers)
+
+#fonction pour détecter les boucles
+def cycledetect(pr):
+        cyleElem=[]
+        R=bfsSearch(pr,lambda n:n in pr.getNeighbors(n))
+        while R[0] is not None:
+                cyleElem.append(R[0])
+                R=bfsSearch(pr,lambda n:n in pr.getNeighbors(n) and n not in cyleElem)
+
+        for x in cyleElem:
+                print(x)

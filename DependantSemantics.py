@@ -23,11 +23,11 @@ class DependantSoupSemantics(DependantSemantics):
         return self.soup.initial()
     
     def actions(self, input,source):#garde() ne prend qu'un parametre dans sa signature-solution a trouver
-        return filter(lambda p:p.garde(input,source),self.soup.pieces())
+        return list(filter(lambda p:p.garde(input,source),self.soup.pieces()))
     
     def execute(self,piece, input,source):#input=step
         src=copy.deepcopy(source)
         inp=copy.deepcopy(input)
-        return piece.action(inp,src)
+        return [piece.action(inp,src)]
     
 
