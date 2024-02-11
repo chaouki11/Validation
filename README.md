@@ -22,8 +22,8 @@ Version avec et sans langage soup pour Hanoi
 - vérification de propriété avec automate de bucchi: potentielle erreur dans les gardes et les actions de l'automate de bucchi, l'automate testé est le suivant:
 <br>
 <br>
-![image](https://github.com/chaouki11/Validation/assets/82370973/94c06c3b-314f-41ec-8b4f-5bc483149542)
 
+<img src="/res/annexe1.png" alt="Alt text" title="Optional title">
 
 
 # objectif 
