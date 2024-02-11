@@ -9,6 +9,7 @@ Les divers configuration alice et bob:
 - AliceBobPeterson: alice et bob avec algorithme de peterson
 
 Versions avec et sans langage soup pour V0 et V1 
+<br>
 Version uniquement avec langage soup pour V2 et peterson
 
 Version avec et sans langage soup pour Hanoi
