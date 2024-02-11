@@ -22,7 +22,9 @@ Version avec et sans langage soup pour Hanoi
 - vérification de propriété avec automate de bucchi: potentielle erreur dans les gardes et les actions de l'automate de bucchi, l'automate testé est le suivant:
 <br>
 <br>
-![automate de bucchi](./res/annexe1.png)
+![image](https://github.com/chaouki11/Validation/assets/82370973/94c06c3b-314f-41ec-8b4f-5bc483149542)
+
+
 
 # objectif 
 L'objectif principal de ce projet est de fournir un ensemble d'outils et de fonctionnalités pour étudier et valider des solutions liées aux graphes et à la synchronisation. Il permet également de comprendre et d'expérimenter différents algorithmes et concepts abordés dans le cadre du cours de validation.
